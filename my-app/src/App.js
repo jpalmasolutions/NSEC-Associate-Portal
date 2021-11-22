@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+
+  var url = 'https://api.nsec-associate.com';
+  fetch(url).then((response) => response.json())
+          .catch((error) => console.log(error));
+
   return (
     <div className="App">
       <header className="App-header">
