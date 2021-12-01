@@ -14,8 +14,9 @@ async function createUser(data) {
     },
   })
 
+  console.log(JSON.stringify(data))
   const result = await response.json()
-
+  console.log(result)
   if (!response.ok) {
     throw new Error(data.message || 'Something went wrong!')
   }
