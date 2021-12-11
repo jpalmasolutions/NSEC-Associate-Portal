@@ -1,0 +1,12 @@
+#!/bin/bash
+sudo su
+yum update -y
+amazon-linux-extras install docker
+service docker start
+usermod -a -G docker ec2-user
+cd ~
+aws s3 cp s3://jpalmasolutions/zip/nsec-associate-portal/Dec_02_2021_08_27_25.zip ~/app.zip
+unzip app.zip -d ~/app/
+cd ~/app
+docker image build -t nsec:1.0 .
+docker run -p 443:3000 -t nsec:1.0
