@@ -23,15 +23,24 @@ def unauthorized():
     return render_template("unauthorized.html"), 401
 
 
+@errors_bp.route('/not_found', methods=['GET'])
+def not_found():
+    return render_template('not_found.html'), 404
+
+
 @errors_bp.app_errorhandler(Unauthorized)
 def unauthorized_error(error: HTTPException):
     return redirect(url_for('errors.unauthorized'))
 
 
+@errors_bp.app_errorhandler(NotFound)
+def not_found_error(error : HTTPException):
+    return redirect(url_for('errors.not_found'))
+
+
 # All errors will throw an HTTPException
 # Responds with error status code and error message
 @errors_bp.app_errorhandler(InternalServerError)
-@errors_bp.app_errorhandler(NotFound)
 @errors_bp.app_errorhandler(BadRequest)
 @errors_bp.app_errorhandler(MethodNotAllowed)
 def error_handler(error: HTTPException):
