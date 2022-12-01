@@ -1,55 +1,43 @@
 import os
 import sqlite3
 
-from flask import Flask, redirect, render_template
-from flask_login import LoginManager, current_user
-from src.app.services.auth import auth_bp
-from src.app.services.leads import lead_bp
+from flask import Flask
+from flask_login import LoginManager
+from src.app.routes.auth import auth_bp
+from src.app.routes.leads import lead_bp
+from src.app.routes.home import home_bp
+from src.app.routes.errors import errors_bp
 from src.app.user.user import User
-from src.app.utils.constants import TEMPLATE_FOLDER
 from src.app.utils.db import init_db_command
-from werkzeug.exceptions import (
-    BadRequest,
-    HTTPException,
-    InternalServerError,
-    MethodNotAllowed,
-    NotFound,
-    Unauthorized,
-)
 
-app = Flask(__name__, template_folder=TEMPLATE_FOLDER)
+
+""" The Flask app is initialized.
+
+    The secret key is set to keep sessions secure.
+    Blueprints are registered to properly modularize routing.
+    Flask Login Manager is used to maintain sessions.
+"""
+app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_VALUE_KEY") or os.urandom(24)
 app.register_blueprint(lead_bp)
 app.register_blueprint(auth_bp)
+app.register_blueprint(home_bp)
+app.register_blueprint(errors_bp)
 login_manager = LoginManager(app)
-
-
-@app.route("/")
-def hello():
-    if current_user.is_authenticated:
-        return render_template("index.html", user=current_user)
-    else:
-        return render_template("auth/login.html"), 200
 
 
 @login_manager.user_loader
 def load_user(user_id):
+    """Function Details:
+
+    Parameters:
+        user_id - ID that is being used to login, returned from OAuth Google Call
+
+    Returns:
+        User - A User object that contains the details of user trying to log in.
+        None - Returns none if no user is found with passed id.
+    """
     return User.get(user_id)
-
-
-@app.errorhandler(Unauthorized)
-def unauthorized(error: HTTPException):
-    return render_template("errors/unauthorized.html"), error.code
-
-
-# All errors will throw an HTTPException
-# Responds with error status code and error message
-@app.errorhandler(InternalServerError)
-@app.errorhandler(NotFound)
-@app.errorhandler(BadRequest)
-@app.errorhandler(MethodNotAllowed)
-def error_handler(error: HTTPException):
-    return redirect("/"), error.code
 
 
 @app.before_first_request
