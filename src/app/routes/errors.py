@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, redirect, url_for
 from src.app.utils.constants import TEMPLATE_FOLDER
 from werkzeug.exceptions import (
     BadRequest,
@@ -13,13 +13,19 @@ from werkzeug.exceptions import (
 errors_bp = Blueprint(
     name="errors",
     import_name=__name__,
-    template_folder=f'{TEMPLATE_FOLDER}/errors/'
+    url_prefix='/oops',
+    template_folder=f'{TEMPLATE_FOLDER}/errors'
 )
 
 
+@errors_bp.route('/unauthorized', methods=['GET'])
+def unauthorized():
+    return render_template("unauthorized.html"), 401
+
+
 @errors_bp.app_errorhandler(Unauthorized)
-def unauthorized(error: HTTPException):
-    return render_template("errors/unauthorized.html"), error.code
+def unauthorized_error(error: HTTPException):
+    return redirect(url_for('errors.unauthorized'))
 
 
 # All errors will throw an HTTPException
@@ -29,4 +35,5 @@ def unauthorized(error: HTTPException):
 @errors_bp.app_errorhandler(BadRequest)
 @errors_bp.app_errorhandler(MethodNotAllowed)
 def error_handler(error: HTTPException):
-    return redirect("/"), error.code
+    print(error.description)
+    return redirect(url_for('home.home'))
