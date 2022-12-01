@@ -4,10 +4,16 @@
     <head>
         <meta charset="UTF-8">
         <title>LEADS</title>
+        <link rel="stylesheet" href="/static/style.css">
     </head>
 
     <body>
-        <h1>Welcome to Leads</h1>
+        {% for lead in leads %}
+            {% for key, value in lead.items() %}
+                <p>{{key}}</p>
+                <p>{{value}}</p>
+            {% endfor %}
+        {% endfor %}
     </body>
 
 </html>

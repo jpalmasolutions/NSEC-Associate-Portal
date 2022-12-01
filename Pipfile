@@ -4,6 +4,21 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+cachetools = '*'
 flask = '*'
+flask-login = '*'
+google-auth = '*'
+google-auth-oauthlib = '*'
+requests = '*'
+pyopenssl = '*'
+pyyaml = '*'
+
 [requires]
 python_version = "3.9"
+
+[dev-packages]
+flake8 = "*"
+black = "*"
+
+[pipenv]
+allow_prereleases = true

@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>FlaskBlog</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskBlog</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
 
-    <body>
-        <h1>Welcome to FlaskBlog</h1>
-    </body>
+<body>
+    <p>Hello, {{user.name}}! You're logged in! Email: {{user.email}}</p>
+    <div>
+        <p>Google Profile Picture:</p>
+        <img src="{{user.profile_picture}}" alt="Google profile pic"></img>
+    </div>
+    <a class="button" href="/auth/logout">Logout</a>
+</body>
 
 </html>
