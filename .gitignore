@@ -163,3 +163,4 @@ json/
 *.db
 *local*
 .vscode
+.DS_Store

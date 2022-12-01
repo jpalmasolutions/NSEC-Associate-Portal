@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>LEADS</title>
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>LEADS</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="/static/materialize/css/materialize.min.css">
+</head>
 
-    <body>
-        {% for lead in leads %}
-            {% for key, value in lead.items() %}
-                <p>{{key}}</p>
-                <p>{{value}}</p>
+<body class = "container">
+    <ul class="collection">
+    {% for lead in leads %}
+        <li class="collection-item">
+            {% for person in lead.people %}
+            <p>Name: {{person.first_name}} {{person.last_name}}</p>
+            <p>Email: {{person.email}}</p>
+            <p>Phone Number: {{person.phone_number}}</p>
             {% endfor %}
-        {% endfor %}
-    </body>
+            <p>Street: {{lead.street}}</p>
+            <p>City: {{lead.city}}</p>
+            <p>State: {{lead.state}}</p>
+            <p>Postal Code: {{lead.postalcode}}</p>
+            <a href="/leads/{{lead.lead_id}}" class="secondary-content"><i class="medium material-icons">person</i></a>
+        </li>
+    {% endfor %}
+    </ul>
+</body>
 
 </html>

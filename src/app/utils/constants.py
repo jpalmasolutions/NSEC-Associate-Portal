@@ -4,7 +4,7 @@ import yaml
 cwd = os.getcwd()
 
 config = {}
-YAML_CONFIG_PATH = f'{cwd}/src/resources/yaml/config.yaml'
+YAML_CONFIG_PATH = f'{cwd}/src/resources/yaml/config-local.yaml'
 
 with open(YAML_CONFIG_PATH, 'r') as config_file:
     config = yaml.load(stream=config_file, Loader=yaml.SafeLoader)

@@ -3,6 +3,7 @@ from requests import Response
 
 from flask import Blueprint, make_response, jsonify, render_template
 from flask_login import login_required
+from src.app.models.lead import Lead
 from src.app.utils.constants import NSEC_API_HEADERS, NSEC_API_URI, TEMPLATE_FOLDER
 
 lead_bp = Blueprint(
@@ -19,16 +20,14 @@ def get_all_leads():
     leads_uri = "{api}/leads".format(api=NSEC_API_URI)
     response: Response = requests.get(url=leads_uri, headers=NSEC_API_HEADERS)
 
-    data = {}
-
     if response.status_code != 200:
         print(response.text)
     else:
         data = response.json()
 
-    leads = data.get("leads", {})
+    leads_objs = Lead.get_leads(leads=data.get("leads", {}))
 
-    return render_template("leads.html", leads=leads), 200
+    return render_template("leads.html", leads=leads_objs), 200
 
 
 @lead_bp.route("/<id>", methods=["GET"])
