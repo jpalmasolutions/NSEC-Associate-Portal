@@ -6,8 +6,8 @@ from google.oauth2 import id_token
 from google_auth_oauthlib.flow import Flow
 from pip._vendor import cachecontrol
 
-from src.app.user.user import User
-from src.app.utils.constants import (
+from app.user.user import User
+from app.utils.constants import (
     CLIENT_SECRETS_FILE_PATH,
     GOOGLE_CLIENT_ID,
     TEMPLATE_FOLDER,
@@ -20,7 +20,7 @@ flow = Flow.from_client_secrets_file(
         "https://www.googleapis.com/auth/userinfo.email",
         "openid",
     ],
-    redirect_uri="https://577f-2600-4040-2df8-e000-4e-e67-f7f1-8a49.ngrok.io/auth/callback",
+    redirect_uri="https://9bea-2600-4040-2df8-e000-e8a5-a586-944d-766e.ngrok.io/auth/callback",
 )
 
 auth_bp = Blueprint(

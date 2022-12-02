@@ -3,12 +3,12 @@ import sqlite3
 
 from flask import Flask
 from flask_login import LoginManager
-from src.app.routes.auth import auth_bp
-from src.app.routes.leads import lead_bp
-from src.app.routes.home import home_bp
-from src.app.routes.errors import errors_bp
-from src.app.user.user import User
-from src.app.utils.db import init_db_command
+from app.routes.auth import auth_bp
+from app.routes.leads import lead_bp
+from app.routes.home import home_bp
+from app.routes.errors import errors_bp
+from app.user.user import User
+from app.utils.db import init_db_command
 
 
 """ The Flask app is initialized.
@@ -49,4 +49,4 @@ def init_db():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, ssl_context="adhoc")
+    app.run(debug=True, ssl_context="adhoc", host='0.0.0.0')

@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 from flask_login import current_user
-from src.app.utils.constants import TEMPLATE_FOLDER
+from app.utils.constants import TEMPLATE_FOLDER
 
 
 home_bp = Blueprint(

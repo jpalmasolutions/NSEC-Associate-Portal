@@ -2,7 +2,7 @@ import jsons
 
 from dataclasses import dataclass, field
 from jsons import JsonSerializable
-from src.app.models import appointment, file, note, person
+from app.models import appointment, file, note, person
 
 
 @dataclass

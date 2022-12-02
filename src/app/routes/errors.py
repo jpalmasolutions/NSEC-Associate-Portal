@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for
-from src.app.utils.constants import TEMPLATE_FOLDER
+from app.utils.constants import TEMPLATE_FOLDER
 from werkzeug.exceptions import (
     BadRequest,
     HTTPException,

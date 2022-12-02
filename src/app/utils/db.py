@@ -1,7 +1,7 @@
 import sqlite3
 from flask import current_app, g, Flask
 
-from src.app.utils.constants import RESOURCE_FOLDER
+from app.utils.constants import RESOURCE_FOLDER
 
 def get_db():
     if 'db' not in g:

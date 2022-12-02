@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from flask_login import UserMixin
-from src.app.utils.db import get_db
+from app.utils.db import get_db
 
 
 @dataclass

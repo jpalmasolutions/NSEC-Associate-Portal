@@ -3,8 +3,8 @@ from requests import Response
 
 from flask import Blueprint, make_response, jsonify, render_template
 from flask_login import login_required
-from src.app.models.lead import Lead
-from src.app.utils.constants import NSEC_API_HEADERS, NSEC_API_URI, TEMPLATE_FOLDER
+from app.models.lead import Lead
+from app.utils.constants import NSEC_API_HEADERS, NSEC_API_URI, TEMPLATE_FOLDER
 
 lead_bp = Blueprint(
     name="lead",
